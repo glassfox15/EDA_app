@@ -1,5 +1,5 @@
 import streamlit as st
-# python3 -m streamlit run /Users/jake/streamlit_project/app.py (command in terminal)
+# python3 -m streamlit run /Users/jake/Python/streamlit_project/app.py (command in terminal)
 
 st.title('Stats 21 - Streamlit Project')
 st.markdown("For example, this here  is a **bold text**")
