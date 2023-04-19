@@ -1,4 +1,7 @@
-Streamlit application for the python package
+# Stats 21 - Streamlit project
+
+[Streamlit app] for Stats 21, Spring 2023
+ > replace with url
 
 This streamlit application performs a simple EDA
 
@@ -6,7 +9,6 @@ This streamlit application performs a simple EDA
 
 * Describe 1
 * Describe 2
-
 
 
 
