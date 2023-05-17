@@ -1,5 +1,8 @@
 import streamlit as st
 # python3 -m streamlit run /Users/jake/Python/streamlit_project/app.py (command in terminal)
+# Will not run in virtual environment, need to [CMD] + [SHFT] + P then "Python: Select Interpreter"
+# deactivate (command in terminal to exit venv)
+
 
 st.title('Stats 21 - Streamlit Project')
 st.markdown("For example, this here  is a **bold text**")
