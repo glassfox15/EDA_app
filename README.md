@@ -3,7 +3,7 @@
 [Streamlit app](https://glassfox15-streamlit-project-app-x1gp3t.streamlit.app/) for Stats 21, Spring 2023 at UCLA
  > https://glassfox15-streamlit-project-app-x1gp3t.streamlit.app/
 
-This streamlit application was created by Jacob Titcomb. It (hopefully) performs a simple EDA.
+This streamlit application was created by Jacob Titcomb. It (hopefully) performs a simple exploratory data analysis (EDA) of a provided data set.
 
 *Please enjoy!*
 
