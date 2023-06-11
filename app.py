@@ -9,10 +9,8 @@ import io
 # python3 -m streamlit run /Users/jake/Python/streamlit_project/app.py
 
 st.title('Exploratory Data Analysis App')
-
 st.sidebar.subheader('Created by Jacob Titcomb')
 uploaded_file = st.sidebar.file_uploader("Choose your data")
-
 
 if uploaded_file is None:
     st.subheader("Perform exploratory data analysis on a data set of your choice.")
