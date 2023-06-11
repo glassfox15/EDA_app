@@ -314,14 +314,18 @@ if uploaded_file is not None:
         scat_ytitle = st.text_input('Set y-axis title', var_Y)
         if var_Z_bool:
            legend_bool = st.checkbox("Include legend")
-           if legend_bool: st.markdown("*Sorry, but this functionality is not supported at this time.*")
+           if legend_bool:
+              legend = "auto"
+           else:
+              legend = False
 
         st.subheader("Scatter plot")
         fig, ax = plt.subplots()
         if var_Z_bool:
            sns.scatterplot(x=var_X, y=var_Y, hue = var_Z,
                            data=df,
-                           alpha=choose_opacity, edgecolor="black")
+                           alpha=choose_opacity, edgecolor="black",
+                           legend=legend)
         else:
            ax.scatter(x=var_X, y=var_Y, c=choose_color,
                       data=df,
