@@ -5,6 +5,9 @@ from matplotlib import pyplot as plt
 import seaborn as sns
 import io
 
+# To access app on local device:
+# python3 -m streamlit run /Users/jake/Python/streamlit_project/app.py
+
 st.title('Exploratory Data Analysis App')
 
 st.sidebar.subheader('Created by Jacob Titcomb')
@@ -55,8 +58,6 @@ if uploaded_file is not None:
        if num_sum:
           st.write(df.describe())
 
-    # Univariate analysis
-
     existing_dtypes = [["Numerical", "Categorical", "Boolean"][i]
                        for i in range(3)
                        if (np.array((len(numeric_cols),
@@ -65,20 +66,20 @@ if uploaded_file is not None:
     
     # Univariate analysis
     if web_apps == "Univariate":
-       st.subheader("Variable selection")
-       var_type = st.selectbox('Select data type',
+       st.sidebar.subheader("Variable selection")
+       var_type = st.sidebar.selectbox('Select data type',
                                existing_dtypes)
        
        # === Numeric types =====================================
        if var_type == "Numerical":
-        var1 = st.selectbox("Select column of interest",
+        var1 = st.sidebar.selectbox("Select column of interest",
                               numeric_cols)
           
         st.subheader("Summary statistics")
         st.table(df[var1].describe())
 
         # histogram
-        st.subheader("Histogram")
+        st.subheader("Parameters for plotting")
 
         choose_color = st.color_picker('Pick a color', "#69b3a2")
         choose_opacity = st.slider(
@@ -91,6 +92,7 @@ if uploaded_file is not None:
         hist_xtitle = st.text_input('Set x-axis title', var1)
         hist_mean = st.checkbox("Show mean")
 
+        st.subheader("Histogram")
         fig, ax = plt.subplots()
         ax.hist(df[var1], bins=hist_bins,
             edgecolor="black", color=choose_color, alpha=choose_opacity)
@@ -123,7 +125,7 @@ if uploaded_file is not None:
              
        # === Categorical types =====================================
        if var_type == "Categorical":
-          var1 = st.selectbox("Select column of interest",
+          var1 = st.sidebar.selectbox("Select column of interest",
                               category_cols)
           
           # table of proportions
@@ -131,8 +133,8 @@ if uploaded_file is not None:
           st.table(df[var1].value_counts(normalize=True))
 
 
-        #   # barplot
-          st.subheader("Bar plot")
+          # barplot
+          st.subheader("Parameters for plotting")
           choose_color = st.color_picker('Pick a color', "#69b3a2")
           choose_opacity = st.slider(
              'Color opacity', min_value=0.0, max_value=1.0,
@@ -144,7 +146,8 @@ if uploaded_file is not None:
              bar_data = df[var1].value_counts(normalize=False)
           else:
              bar_data = df[var1].value_counts(normalize=True)
-
+          
+          st.subheader("Bar plot")
           fig, ax = plt.subplots()
           ax.bar(x = bar_data.index,
                  height=bar_data,
@@ -178,7 +181,7 @@ if uploaded_file is not None:
           
        # === Boolean types =====================================
        if var_type == "Boolean":
-          var1 = st.selectbox("Select column of interest",
+          var1 = st.sidebar.selectbox("Select column of interest",
                               bool_cols)
           
           # table of proportions
@@ -186,7 +189,7 @@ if uploaded_file is not None:
           st.table(df[var1].value_counts(normalize=True))
           
           # Donut plot
-          st.subheader("Donut plot")
+          st.subheader("Parameters for plotting")
           choose_color1 = st.color_picker('Pick color 1', "#9084E8")
           choose_color2 = st.color_picker('Pick color 2', "#E8D684")
           choose_opacity = st.slider(
@@ -196,6 +199,7 @@ if uploaded_file is not None:
           don_xtitle = st.text_input('Set x-axis title', var1)
           don_data = df[var1].value_counts(normalize=False)
 
+          st.subheader("Donut plot")
           fig, ax = plt.subplots()
           ax.pie(don_data,
                  colors = np.array([choose_color1, choose_color2]),
@@ -233,9 +237,9 @@ if uploaded_file is not None:
     # Multivariate analysis
     if web_apps == "Multivariate":
        avail_numeric = numeric_cols
-       st.subheader("Variable selection")
+       st.sidebar.subheader("Variable selection")
 
-       var_X = st.selectbox('Select a numerical variable',
+       var_X = st.sidebar.selectbox('Select a numerical variable',
                                numeric_cols)
        avail_numeric = [value for value in avail_numeric if value != var_X]
        avail_dtypes = [["Numerical", "Categorical", "Boolean"][i]
@@ -244,16 +248,16 @@ if uploaded_file is not None:
                                      len(category_cols),
                                      len(bool_cols))) > 0)[i]]
 
-       var_Y_type = st.selectbox("Select data type of secondary variable",
+       var_Y_type = st.sidebar.selectbox("Select data type of secondary variable",
                                  avail_dtypes)
        
        # Non-numeric secondary variable
        if var_Y_type != "Numerical":
         if var_Y_type == "Categorical":
-            var_Y = st.selectbox("Select secondary variable",
+            var_Y = st.sidebar.selectbox("Select secondary variable",
                                  category_cols)
         if var_Y_type == "Boolean":
-           var_Y = st.selectbox("Select secondary variable",
+           var_Y = st.sidebar.selectbox("Select secondary variable",
                                 bool_cols)
         
         st.subheader("Parameters for plotting")
@@ -291,12 +295,12 @@ if uploaded_file is not None:
 
        # Numeric secondary variable
        if var_Y_type == "Numerical":
-        var_Y = st.selectbox("Select secondary variable",
+        var_Y = st.sidebar.selectbox("Select secondary variable",
                              avail_numeric)
         avail_cols = [value for value in df.columns if value not in [var_X, var_Y]]
-        var_Z_bool = st.checkbox("Include tertiary variable")
+        var_Z_bool = st.sidebar.checkbox("Include tertiary variable")
         if var_Z_bool:
-           var_Z = st.selectbox("Select tertiary variable",
+           var_Z = st.sidebar.selectbox("Select tertiary variable",
                                 avail_cols)
            
         # scatterplot
