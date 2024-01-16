@@ -2,7 +2,7 @@ streamlit >= 1.21.0
 
 contourpy==1.0.7
 cycler==0.11.0
-fonttools==4.39.4
+fonttools>=4.47.2
 kiwisolver==1.4.4
 matplotlib==3.7.1
 numpy==1.24.3
